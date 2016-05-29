@@ -41,10 +41,10 @@ or inside your `package.json` configuration:
 
 ```json
 {
-  'name': 'my-spiffy-package',
-  'browserify': {
-    'transform': [
-      ['snakeskinify', {prettyPrint: true}]
+  "name": "my-spiffy-package",
+  "browserify": {
+    "transform": [
+      ["snakeskinify", {prettyPrint: true}]
     ]
   }
 }
