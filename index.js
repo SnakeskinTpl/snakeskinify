@@ -1,9 +1,9 @@
 /*!
- * snakeskin-loader
- * https://github.com/SnakeskinTpl/snakeskin-loader
+ * snakeskinify
+ * https://github.com/SnakeskinTpl/snakeskinify
  *
  * Released under the MIT license
- * https://github.com/SnakeskinTpl/snakeskin-loader/blob/master/LICENSE
+ * https://github.com/SnakeskinTpl/snakeskinify/blob/master/LICENSE
  */
 
 require('core-js/es6/object');
