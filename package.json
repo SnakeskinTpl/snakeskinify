@@ -1,0 +1,47 @@
+{
+  "name": "snakeskinify",
+  "description": "Using Snakeskin with Browserify.",
+  "homepage": "https://github.com/SnakeskinTpl/snakeskinify",
+  "main": "index.js",
+  "license": "MIT",
+  "version": "7.0.0",
+  "author": {
+    "name": "kobezzza",
+    "email": "kobezzza@mail.ru",
+    "url": "https://github.com/kobezzza"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SnakeskinTpl/snakeskinify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SnakeskinTpl/snakeskinify/issues"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [
+    "browserify",
+    "transform",
+    "snakeskin"
+  ],
+  "dependencies": {
+    "collection.js": "^5.5.5",
+    "core-js": "^2.4.0",
+    "exists-sync": "0.0.3",
+    "js-beautify": "^1.5.10",
+    "through": "^2.3.8"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "jscs": "^3.0.0",
+    "snakeskin": "^7.0.10"
+  },
+  "peerDependencies": {
+    "snakeskin": "^7.0.10",
+    "browserify": "*"
+  }
+}
