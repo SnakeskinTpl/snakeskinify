@@ -44,7 +44,7 @@ or inside your `package.json` configuration:
   "name": "my-spiffy-package",
   "browserify": {
     "transform": [
-      ["snakeskinify", {prettyPrint: true}]
+      ["snakeskinify", {"prettyPrint": true}]
     ]
   }
 }
