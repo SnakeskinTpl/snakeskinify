@@ -15,34 +15,39 @@ Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) with [Browserify](h
 npm install snakeskinify --save-dev
 ```
 
-## Usage
+## Setup
 
-**webpack.config.json**
+When creating your browserify bundle, just add this line:
 
 ```js
-var webpack = require('webpack');
+bundle.transform(require('snakeskinify'));
+```
 
-webpack({
-  entry: {
-      index: './index.js'
-  },
+or if you are a command line cowboy, something along the lines of
 
-  output: {
-      filename: '[name].bundle.js'
-  },
+```js
+browserify -t snakeskinify entry.js -o bundle.js
+```
 
-  module: {
-    loaders: [
-      {
-        test: /\.ss$/,
-        exclude: /node_modules/,
-        loader: 'snakeskinify?localization=false&exec=true'
-      }
+## Configuration
+
+As with most browserify transforms, you can configure snakeskinify via the second argument to `bundle.transform`:
+
+```js
+bundle.transform(require('snakeskinify'), {prettyPrint: true});
+```
+
+or inside your `package.json` configuration:
+
+```json
+{
+  'name': 'my-spiffy-package',
+  'browserify': {
+    'transform': [
+      ['snakeskinify', {prettyPrint: true}]
     ]
   }
-}, function (err, stats) {
-    // ...
-});
+}
 ```
 
 ## [Options](http://snakeskintpl.github.io/docs/api.html#compile--opt_params)
