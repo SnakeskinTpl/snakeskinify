@@ -4,7 +4,7 @@
   "homepage": "https://github.com/SnakeskinTpl/snakeskinify",
   "main": "index.js",
   "license": "MIT",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "author": {
     "name": "kobezzza",
     "email": "kobezzza@mail.ru",
@@ -37,11 +37,11 @@
   },
   "devDependencies": {
     "browserify": "^13.0.1",
-    "jscs": "^3.0.0",
-    "snakeskin": "^7.0.10"
+    "eslint": "^2.13.1",
+    "snakeskin": "^7.1.9"
   },
   "peerDependencies": {
-    "snakeskin": "^7.0.10",
+    "snakeskin": "^7.1.9",
     "browserify": "*"
   }
 }

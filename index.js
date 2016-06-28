@@ -24,9 +24,15 @@ module.exports = function (file, opts) {
 	}
 
 	var
-		ssrc = path.join(process.cwd(), '.snakeskinrc');
+		ssrc = path.join(process.cwd(), '.snakeskinrc'),
+		info = {file: file};
 
-	if ($C(opts).every(function (el, key) { return key[0] === '_'; }) && exists(ssrc)) {
+	if (
+		$C(opts).every(function (el, key) {
+			return key[0] === '_';
+		}) && exists(ssrc)
+
+	) {
 		Object.assign(opts, snakeskin.toObj(ssrc));
 	}
 
@@ -56,48 +62,72 @@ module.exports = function (file, opts) {
 		},
 
 		function () {
-			var res;
-			try {
-				if (opts.jsx) {
-					res = snakeskin.compileAsJSX(source, opts, {file: file});
+			var that = this;
+			function cache() {
+				$C(opts.debug.files).forEach(function (el, file) {
+					that.emit('file', file);
+				});
+			}
+
+			function cb(err, res) {
+				if (err) {
+					that.emit('error', err);
 
 				} else {
-					var tpls = {};
+					that.queue(res);
+					that.queue(null);
+				}
+			}
 
-					if (opts.exec) {
-						opts.module = 'cjs';
-						opts.context = tpls;
+			if (opts.adapter || opts.jsx) {
+				return require(opts.jsx ? 'ss2react' : opts.adapter).adapter(source, opts, info).then(
+					function (res) {
+						cache();
+						cb(null, res);
+					},
+
+					function (err) {
+						cb(err);
 					}
+				);
+			}
 
-					res = snakeskin.compile(source, opts, {file: file});
+			try {
+				var tpls = {};
 
-					if (opts.exec) {
-						res = snakeskin.getMainTpl(tpls, file, opts.tpl) || '';
+				if (opts.exec) {
+					opts.module = 'cjs';
+					opts.context = tpls;
+				}
 
-						if (res) {
-							res = res(opts.data);
+				var res = snakeskin.compile(source, opts, info);
+				cache();
 
-							if (prettyPrint) {
-								res = beautify.html(res);
+				if (opts.exec) {
+					res = snakeskin.getMainTpl(tpls, info.file, opts.tpl) || '';
+
+					if (res) {
+						return snakeskin.execTpl(res, opts.data).then(
+							function (res) {
+								if (prettyPrint) {
+									res = beautify.html(res);
+								}
+
+								cb(null, res.replace(nRgxp, eol) + eol);
+							},
+
+							function (err) {
+								cb(err);
 							}
-
-							res = res.replace(nRgxp, eol) + eol;
-						}
+						);
 					}
 				}
 
+				cb(null, res);
+
 			} catch (err) {
-				this.emit('error', err);
-				return;
+				return cb(err);
 			}
-
-			var that = this;
-			$C(opts.debug.files).forEach(function (bool, filePath) {
-				that.emit('file', filePath);
-			});
-
-			this.queue(res);
-			this.queue(null);
 		}
 	);
 };
