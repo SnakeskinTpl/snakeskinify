@@ -6,10 +6,10 @@
  * https://github.com/SnakeskinTpl/snakeskinify/blob/master/LICENSE
  */
 
-require('core-js/es6/object');
+require('core-js');
 
 var
-	$C = require('collection.js').$C;
+	$C = require('collection.js/compiled');
 
 var
 	path = require('path'),
