@@ -6,8 +6,8 @@ Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) with [Browserify](h
 [![NPM version](http://img.shields.io/npm/v/snakeskinify.svg?style=flat)](http://badge.fury.io/js/snakeskinify)
 [![Build Status](http://img.shields.io/travis/SnakeskinTpl/snakeskinify.svg?style=flat&branch=master)](https://travis-ci.org/SnakeskinTpl/snakeskinify)
 [![NPM dependencies](http://img.shields.io/david/SnakeskinTpl/snakeskinify.svg?style=flat)](https://david-dm.org/SnakeskinTpl/snakeskinify)
-[![NPM devDependencies](http://img.shields.io/david/dev/SnakeskinTpl/snakeskinify.svg?style=flat)](https://david-dm.org/SnakeskinTpl/snakeskinify#info=devDependencies&view=table)
-[![NPM peerDependencies](https://david-dm.org/SnakeskinTpl/snakeskinify/peer-status.svg)](https://david-dm.org/SnakeskinTpl/snakeskinify#info=peerDependencies)
+[![NPM devDependencies](http://img.shields.io/david/dev/SnakeskinTpl/snakeskinify.svg?style=flat)](https://david-dm.org/SnakeskinTpl/snakeskinify?type=dev)
+[![NPM peerDependencies](http://img.shields.io/david/peer/SnakeskinTpl/snakeskinify.svg?style=flat)](https://david-dm.org/SnakeskinTpl/snakeskinify?type=peer)
 
 ## Install
 
