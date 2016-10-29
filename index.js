@@ -1,3 +1,5 @@
+'use strict';
+
 /*!
  * snakeskinify
  * https://github.com/SnakeskinTpl/snakeskinify
@@ -6,12 +8,10 @@
  * https://github.com/SnakeskinTpl/snakeskinify/blob/master/LICENSE
  */
 
-require('core-js');
-
-var
+const
 	$C = require('collection.js/compiled');
 
-var
+const
 	path = require('path'),
 	through = require('through'),
 	snakeskin = require('snakeskin'),
@@ -23,14 +23,12 @@ module.exports = function (file, opts) {
 		return through();
 	}
 
-	var
+	const
 		ssrc = path.join(process.cwd(), '.snakeskinrc'),
-		info = {file: file};
+		info = {file};
 
 	if (
-		$C(opts).every(function (el, key) {
-			return key[0] === '_';
-		}) && exists(ssrc)
+		$C(opts).every((el, key) => key[0] === '_') && exists(ssrc)
 
 	) {
 		Object.assign(opts, snakeskin.toObj(ssrc));
@@ -42,7 +40,7 @@ module.exports = function (file, opts) {
 		pack: true
 	}, opts);
 
-	var
+	const
 		eol = opts.eol,
 		prettyPrint = opts.prettyPrint,
 		nRgxp = /\r?\n|\r/g;
@@ -55,52 +53,50 @@ module.exports = function (file, opts) {
 	opts.cache = false;
 	opts.throws = true;
 
-	var source = '';
+	let source = '';
 	return through(
-		function (chunk) {
+		(chunk) => {
 			source += chunk;
 		},
 
 		function () {
-			var that = this;
 			function cache() {
-				$C(opts.debug.files).forEach(function (el, file) {
-					that.emit('file', file);
-				});
+				$C(opts.debug.files).forEach((el, file) => this.emit('file', file));
 			}
 
-			function cb(err, res) {
+			const cb = (err, res) => {
 				if (err) {
-					that.emit('error', err);
+					this.emit('error', err);
 
 				} else {
-					that.queue(res);
-					that.queue(null);
+					this.queue(res);
+					this.queue(null);
 				}
-			}
+			};
 
 			if (opts.adapter || opts.jsx) {
 				return require(opts.jsx ? 'ss2react' : opts.adapter).adapter(source, opts, info).then(
-					function (res) {
+					(res) => {
 						cache();
 						cb(null, res);
 					},
 
-					function (err) {
+					(err) => {
 						cb(err);
 					}
 				);
 			}
 
 			try {
-				var tpls = {};
+				const
+					tpls = {};
 
 				if (opts.exec) {
 					opts.module = 'cjs';
 					opts.context = tpls;
 				}
 
-				var res = snakeskin.compile(source, opts, info);
+				let res = snakeskin.compile(source, opts, info);
 				cache();
 
 				if (opts.exec) {
@@ -108,7 +104,7 @@ module.exports = function (file, opts) {
 
 					if (res) {
 						return snakeskin.execTpl(res, opts.data).then(
-							function (res) {
+							(res) => {
 								if (prettyPrint) {
 									res = beautify.html(res);
 								}
@@ -116,7 +112,7 @@ module.exports = function (file, opts) {
 								cb(null, res.replace(nRgxp, eol) + eol);
 							},
 
-							function (err) {
+							(err) => {
 								cb(err);
 							}
 						);
