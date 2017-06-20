@@ -12,11 +12,11 @@ const
 	$C = require('collection.js/compiled');
 
 const
+	fs = require('fs'),
 	path = require('path'),
 	through = require('through'),
 	snakeskin = require('snakeskin'),
-	beautify = require('js-beautify'),
-	exists = require('exists-sync');
+	beautify = require('js-beautify');
 
 module.exports = function (file, opts) {
 	if (!/\.ss/i.test(file)) {
@@ -28,7 +28,7 @@ module.exports = function (file, opts) {
 		info = {file};
 
 	if (
-		$C(opts).every((el, key) => key[0] === '_') && exists(ssrc)
+		$C(opts).every((el, key) => key[0] === '_') && fs.existsSync(ssrc)
 
 	) {
 		Object.assign(opts, snakeskin.toObj(ssrc));

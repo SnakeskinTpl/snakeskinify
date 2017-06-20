@@ -30,14 +30,12 @@
   ],
   "dependencies": {
     "collection.js": "^6.0.0-beta.6",
-    "exists-sync": "0.0.3",
     "js-beautify": "^1.5.10",
     "through": "^2.3.8"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.0",
     "browserify": "^13.0.1",
-    "eslint": "^3.0.0",
+    "eslint": "^4.0.0",
     "snakeskin": "^7.1.9"
   },
   "peerDependencies": {
