@@ -24,14 +24,14 @@ module.exports = function (file, opts) {
 	}
 
 	const
-		ssrc = path.join(process.cwd(), '.snakeskinrc'),
+		src = path.join(process.cwd(), '.snakeskinrc'),
 		info = {file};
 
 	if (
-		$C(opts).every((el, key) => key[0] === '_') && fs.existsSync(ssrc)
+		$C(opts).every((el, key) => key[0] === '_') && fs.existsSync(src)
 
 	) {
-		Object.assign(opts, snakeskin.toObj(ssrc));
+		Object.assign(opts, snakeskin.toObj(src));
 	}
 
 	opts = Object.assign({
